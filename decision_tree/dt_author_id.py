@@ -19,9 +19,11 @@ from email_preprocess import preprocess
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
 
+# Features used in this data
+number_of_features = len(features_train[0]) # number of columns is the number of features
+print(number_of_features)
 
-
-
+'''
 #########################################################
 ### your code goes here ###
 from sklearn.metrics import accuracy_score
@@ -32,3 +34,4 @@ pred = clf.predict(features_test)
 acc = accuracy_score(labels_test, pred)
 print(acc)
 #########################################################
+'''
