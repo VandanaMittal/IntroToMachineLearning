@@ -54,8 +54,7 @@ except NameError:
     pass
 '''
 
-''' Random Forest
-Accuracy obtained is 0.92 '''
+''' Random Forest : Accuracy obtained is 0.92
 
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
@@ -66,6 +65,28 @@ acc = accuracy_score(labels_test, pred)
 
 print(acc)
 
+try:
+    prettyPicture(clf, features_test, labels_test)
+except NameError:
+    pass
+'''
+
+
+# AdaBoost Classifier : Accuracy obtained is 0.924
+
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import AdaBoostClassifier
+clf = AdaBoostClassifier(n_estimators=100)
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+acc = accuracy_score(labels_test, pred)
+print(acc)
+
+'''cores = cross_val_score(clf, labels_test, pred)
+scr = scores.mean()
+print(scr)
+'''
 try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
