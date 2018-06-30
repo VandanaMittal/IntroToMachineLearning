@@ -28,15 +28,23 @@ plt.show()
 ################################################################################
 
 
-### your code here!  name your classifier object clf if you want the 
+### your code here!  name your classifier object clf if you want the
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from sklearn.metrics import accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
 
+'''
+Neighbours = 7,8,9 are Accuracy = 0.936, 0.944, 0.936 respectively
+'''
+neigh = KNeighborsClassifier(n_neighbors=8) # Accuracy is maximum for 8 neighbours
+neigh.fit(features_train, labels_train)
 
+pred = neigh.predict(features_test)
 
+acc = accuracy_score(labels_test, pred)
 
-
-
+print(acc)
 
 try:
     prettyPicture(clf, features_test, labels_test)
