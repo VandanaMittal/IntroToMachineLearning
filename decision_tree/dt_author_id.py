@@ -23,9 +23,12 @@ features_train, features_test, labels_train, labels_test = preprocess()
 number_of_features = len(features_train[0]) # number of columns is the number of features
 print(number_of_features)
 
-'''
 #########################################################
 ### your code goes here ###
+
+# Changed the number of features from 10% to 1% and then calculated the accuracy
+# Accuracy changed from 0.9795221843 to 0.966439135381
+
 from sklearn.metrics import accuracy_score
 from sklearn import tree
 clf = tree.DecisionTreeClassifier(min_samples_split = 40)
@@ -34,4 +37,3 @@ pred = clf.predict(features_test)
 acc = accuracy_score(labels_test, pred)
 print(acc)
 #########################################################
-'''
