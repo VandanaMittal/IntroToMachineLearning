@@ -31,17 +31,37 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the
 ### visualization code (prettyPicture) to show you the decision boundary
 
+
+''' KNN
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 
-'''
-Neighbours = 7,8,9 are Accuracy = 0.936, 0.944, 0.936 respectively
-'''
+
+# Neighbours = 7,8,9 are Accuracy = 0.936, 0.944, 0.936 respectively
+
 neigh = KNeighborsClassifier(n_neighbors=8) # Accuracy is maximum for 8 neighbours
 neigh.fit(features_train, labels_train)
 
 pred = neigh.predict(features_test)
 
+acc = accuracy_score(labels_test, pred)
+
+print(acc)
+
+try:
+    prettyPicture(clf, features_test, labels_test)
+except NameError:
+    pass
+'''
+
+''' Random Forest
+Accuracy obtained is 0.92 '''
+
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(max_depth=2, random_state=0)
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
 acc = accuracy_score(labels_test, pred)
 
 print(acc)
