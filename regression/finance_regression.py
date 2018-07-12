@@ -2,7 +2,7 @@
 
 """
     Starter code for the regression mini-project.
-    
+
     Loads up/formats a modified version of the dataset
     (why modified?  we've removed some trouble points
     that you'll find yourself in the outliers mini-project).
@@ -10,7 +10,7 @@
     Draws a little scatterplot of the training/testing data
 
     You fill in the regression code where indicated:
-"""    
+"""
 
 
 import sys
@@ -19,38 +19,58 @@ sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
 dictionary = pickle.load( open("../final_project/final_project_dataset_modified.pkl", "r") )
 
-### list the features you want to look at--first item in the 
+### list the features you want to look at--first item in the
 ### list will be the "target" feature
 features_list = ["bonus", "salary"]
+
+# Quiz 44: Regression score when "salary" feature is changed to "long_term_incentive"
+#features_list = ["bonus","long_term_incentive"]
 data = featureFormat( dictionary, features_list, remove_any_zeroes=True)
 target, features = targetFeatureSplit( data )
-
 ### training-testing split needed in regression, just like classification
 from sklearn.cross_validation import train_test_split
 feature_train, feature_test, target_train, target_test = train_test_split(features, target, test_size=0.5, random_state=42)
 train_color = "b"
-test_color = "b"
-
+test_color = "r"
 
 
 ### Your regression goes here!
-### Please name it reg, so that the plotting code below picks it up and 
+### Please name it reg, so that the plotting code below picks it up and
 ### plots it correctly. Don't forget to change the test_color above from "b" to
 ### "r" to differentiate training points from test points.
 
+from sklearn import linear_model
+reg = linear_model.LinearRegression()
+reg.fit(feature_train, target_train)
 
 
+# Quiz 41: What are the slope and intercept?
+slope = reg.coef_
+intercept = reg.intercept_
+print(slope)
+print(intercept)
 
+from sklearn.metrics import r2_score
+#pred = reg.predict(feature_test)
+#score = r2_score(target_test, pred)
 
+# Quiz 42: predicting the training data instead of testdata. R2_score is 0.0455091926995
+pred = reg.predict(feature_train)
+score = r2_score(target_train, pred)
+print(score)
 
+# Quiz 43: predicting the test data, as usual  which we should do. R2_score is -1.48499241737
+pred = reg.predict(feature_test)
+score = r2_score(target_test, pred)
+print(score)
 
 
 ### draw the scatterplot, with color-coded training and testing points
 import matplotlib.pyplot as plt
 for feature, target in zip(feature_test, target_test):
-    plt.scatter( feature, target, color=test_color ) 
+    plt.scatter( feature, target, color=test_color )
 for feature, target in zip(feature_train, target_train):
-    plt.scatter( feature, target, color=train_color ) 
+    plt.scatter( feature, target, color=train_color )
 
 ### labels for the legend
 plt.scatter(feature_test[0], target_test[0], color=test_color, label="test")
@@ -64,6 +84,17 @@ try:
     plt.plot( feature_test, reg.predict(feature_test) )
 except NameError:
     pass
+
+# Quiz 46: Fitting the line on the test data. Slope of the regression line is 2.27.
+# This is better because there are less outliers in the test data. So test data fits better.
+reg.fit(feature_test, target_test)
+plt.plot(feature_train, reg.predict(feature_train), color="b")
+slope_test_data = reg.coef_
+intercept_test_data = reg.intercept_
+print(slope_test_data)
+print(intercept_test_data)
+
+
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
