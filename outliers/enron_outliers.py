@@ -16,11 +16,21 @@ features = ["salary", "bonus"]
 data_dict.pop( 'TOTAL' )
 data = featureFormat(data_dict, features)
 
-for i in data_dict:
-    print i
+#for i in data_dict:
+#    print i
 
+# Quiz 18: Two people made bonuses of at least 5 million dollars, and a salary of over 1 million dollars.
+# What are the names associated with those points?
 
 ### your code below
+'''for i in data_dict:
+    if (data_dict[i]['bonus'] > 4000000  and data_dict[i]['bonus'] != 'NaN'):
+        print i, data_dict[i]['bonus']
+'''
+
+for i in data_dict:
+    if (data_dict[i]['bonus'] > 5000000  and data_dict[i]['bonus'] != 'NaN' and data_dict[i]['salary'] > 1000000 ):
+        print i, data_dict[i]['bonus']
 
 for point in data:
     salary = point[0]
