@@ -27,13 +27,23 @@ ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages
 ### the plotting code below works, and you can see what your regression looks like
 
 
+# Quiz 10: To find the slope and intercept of linear regression
+from sklearn import linear_model
+reg = linear_model.LinearRegression()
+#reg.fit(feature_train, target_train)
+reg.fit(ages_train, net_worths_train)
+
+slope = reg.coef_
+intercept = reg.intercept_
+print "Slope of the linear regression is : ", slope
+print "Intercept of the linear regression is : ", intercept
 
 
-
-
-
-
-
+# Quiz 11: What is the score you get when using your regression to make predictions with the test data?
+from sklearn.metrics import r2_score
+pred = reg.predict(ages_test)
+score = r2_score(net_worths_test, pred)
+print "Score of the linear regression is : ", score
 
 
 try:
@@ -49,6 +59,7 @@ cleaned_data = []
 try:
     predictions = reg.predict(ages_train)
     cleaned_data = outlierCleaner( predictions, ages_train, net_worths_train )
+
 except NameError:
     print "your regression object doesn't exist, or isn't name reg"
     print "can't make predictions to use in identifying outliers"
@@ -68,7 +79,17 @@ if len(cleaned_data) > 0:
     ### refit your cleaned data!
     try:
         reg.fit(ages, net_worths)
+        slope = reg.coef_
+        intercept = reg.intercept_
+        print "Slope after cleaning : ", slope  # Slope has improved from 5.07 to 6.36 after cleaning.
+        print "Intercept after cleaning : ", intercept
+
         plt.plot(ages, reg.predict(ages), color="blue")
+
+        pred = reg.predict(ages_test)
+        score = r2_score(net_worths_test, pred)
+        print "Score after cleaning : ", score  # Score has improved from 0.87 to 0.98 after cleaning
+
     except NameError:
         print "you don't seem to have regression imported/created,"
         print "   or else your regression object isn't named reg"
@@ -81,4 +102,3 @@ if len(cleaned_data) > 0:
 
 else:
     print "outlierCleaner() is returning an empty list, no refitting to be done"
-
