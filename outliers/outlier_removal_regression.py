@@ -27,6 +27,7 @@ ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages
 ### the plotting code below works, and you can see what your regression looks like
 
 
+# Quiz 10: To find the slope and intercept of linear regression
 from sklearn import linear_model
 reg = linear_model.LinearRegression()
 #reg.fit(feature_train, target_train)
@@ -34,9 +35,15 @@ reg.fit(ages_train, net_worths_train)
 
 slope = reg.coef_
 intercept = reg.intercept_
-print("Slope of the linear regression is : ", slope)
-print("Intercept of the linear regression is : ", intercept)
+print "Slope of the linear regression is : ", slope
+print "Intercept of the linear regression is : ", intercept
 
+
+# Quiz 11: What is the score you get when using your regression to make predictions with the test data?
+from sklearn.metrics import r2_score
+pred = reg.predict(ages_test)
+score = r2_score(net_worths_test, pred)
+print "Score of the linear regression is : ", score
 
 
 try:
