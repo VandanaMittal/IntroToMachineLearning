@@ -27,12 +27,15 @@ ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages
 ### the plotting code below works, and you can see what your regression looks like
 
 
+from sklearn import linear_model
+reg = linear_model.LinearRegression()
+#reg.fit(feature_train, target_train)
+reg.fit(ages_train, net_worths_train)
 
-
-
-
-
-
+slope = reg.coef_
+intercept = reg.intercept_
+print("Slope of the linear regression is : ", slope)
+print("Intercept of the linear regression is : ", intercept)
 
 
 
@@ -81,4 +84,3 @@ if len(cleaned_data) > 0:
 
 else:
     print "outlierCleaner() is returning an empty list, no refitting to be done"
-
