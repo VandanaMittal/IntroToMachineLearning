@@ -43,6 +43,7 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 ### there's an outlier--remove it!
 data_dict.pop("TOTAL", 0)
 
+#print(data_dict)
 
 ### the input features we want to use
 ### can be any key in the person-level dictionary (salary, director_fees, etc.)
@@ -53,15 +54,29 @@ poi  = "poi"
 features_list = [poi, feature_1, feature_2, feature_3]  # three features are considered
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
-
+# print(finance_features)
 
 ### in the "clustering with 3 features" part of the mini-project,
 ### you'll want to change this line to
 ### for f1, f2, _ in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
+exercised_stock_options_arr = []
+salary_arr = []
 for f1, f2, f3 in finance_features:
-    plt.scatter( f1, f2 )
+     if f2 > 0:
+         exercised_stock_options_arr.append(f2)
+         #salary_arr.append(f1)
+     if f1 > 0:
+         salary_arr.append(f1)
+         plt.scatter( f1, f2 )
 plt.show()
+
+print("maximum value of exercised_stock_options is : ", max(exercised_stock_options_arr))
+print("minimum value of exercised_stock_options is : ", min(exercised_stock_options_arr))
+
+print("maximum value of salary is : ", max(salary_arr))
+print("minimum value of salary is : ", min(salary_arr))
+
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
