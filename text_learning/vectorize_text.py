@@ -51,14 +51,23 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
             email_text = parseOutText(email)
 
             ### use str.replace() to remove any instances of the words
-            email_text.replace("sara", "")
+            '''email_text.replace("sara", "")
             email_text.replace("shackleton", "")
             email_text.replace("chris", "")
             email_text.replace("germani", "")
-            ### ["sara", "shackleton", "chris", "germani"]
+            ### ["sara", "shackleton", "chris", "germani"]'''
+
+            # ------- Bug was here in this part. We were removing words one by one
+            # but it was not giving the correct result. We changed it to this loop
+            # below. Now it is working fine.
+
+            parsed_email = parseOutText(email)
+            for w in ["sara", "shackleton", "chris", "germani"]:
+                if w in parsed_email:
+                    parsed_email = parsed_email.replace(w, '')
 
             ### append the text to word_data
-            word_data.append(email_text)
+            word_data.append(parsed_email)
 
             ### append a 0 to from_data if email is from Sara, and 1 if email is from Chris
 
@@ -95,8 +104,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # We got the hint to load this pickle file "real_your_word_data" from the following link.
 # The correct number of words are 38757, but using this file we get 38755 words.
 # https://discussions.udacity.com/t/lesson-11-quiz-20-21/636246
-word_data = pickle.load(open("real_your_word_data.pkl.txt", "rb"))
-print "len:", len(word_data)
+#word_data = pickle.load(open("real_your_word_data.pkl.txt", "rb"))
+word_data = pickle.load(open("your_word_data.pkl", "rb"))
+#print "len:", len(word_data)
 
 transformer = TfidfVectorizer(stop_words="english")
 word_data_trans = transformer.fit_transform(word_data)
@@ -104,3 +114,26 @@ word_list = transformer.get_feature_names()
 
 print "Length of word_list: ", len(word_list)
 print "Word Number 34597: ", word_list[34597]
+
+
+#------- We tried this when we were getting the bug. But with trial and error
+# figured out that there was no problem in this part of code. 
+'''from sklearn.feature_extraction.text import TfidfVectorizer
+#word_data = pickle.load(open("real_your_word_data.pkl.txt", "rb"))
+#word_data = pickle.load(open("your_word_data.pkl.txt", "rb"))
+word_data = pickle.load(open("your_word_data.pkl", "rb"))
+
+vectorizer = TfidfVectorizer(stop_words='english')
+
+vectorizer.fit_transform(word_data)
+#print( vectorizer.get_stop_words() )
+unique = vectorizer.get_feature_names()
+print( len(unique))
+
+for x in range(34590, 34600):
+    print x, unique[x]
+
+# for our solution 34595 works as answer even in quiz we are asked to submit 34597.
+# it is probably because our unique words are also 2 less than what was right answer.
+print('q21 answer is : ',unique[34595])
+print('q21 new answer is : ',unique[34597])'''
