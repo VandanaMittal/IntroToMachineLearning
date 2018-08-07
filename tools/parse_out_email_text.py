@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from nltk.stem.snowball import SnowballStemmer
+#from nltk.stem.snowball import SnowballStemmer as SS
 import string
 
 def parseOutText(f):
@@ -34,11 +35,19 @@ def parseOutText(f):
         ### and append the stemmed word to words (make sure there's a single
         ### space between each stemmed word)
 
-        words_split = text_string.split()
-        stemmer = SnowballStemmer("english")
-        for i in words_split:
-            w = stemmer.stem(i)
-            words = words + w + " "
+# Quiz 17 -------------------
+
+    words_split = text_string.split()
+    stemmer = SnowballStemmer("english")
+    for i in words_split:
+        w = stemmer.stem(i)
+        words = words + w + " "
+
+#------- We tried this when we were getting the bug. But with trial and error
+# figured out that there was no problem in this part of code.
+
+    #words = ' '.join(map(lambda x: SS('english').stem(x), text_string.split()))
+        #make bag of words
     return words
 
 
