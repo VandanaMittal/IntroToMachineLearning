@@ -62,7 +62,11 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
             # below. Now it is working fine.
 
             parsed_email = parseOutText(email)
-            for w in ["sara", "shackleton", "chris", "germani"]:
+            # for w in ["sara", "shackleton", "chris", "germani"]:
+            # Removing more words which are causing overfitting. Chapter 12 Quiz 28 onwards
+            # for w in ["sara", "shackleton", "chris", "germani", "sshacklensf"]:
+            # Chapter 12 Quiz 29, Removed the feature "cgermannsf"
+            for w in ["sara", "shackleton", "chris", "germani", "sshacklensf", "cgermannsf"]:
                 if w in parsed_email:
                     parsed_email = parsed_email.replace(w, '')
 
@@ -117,7 +121,7 @@ print "Word Number 34597: ", word_list[34597]
 
 
 #------- We tried this when we were getting the bug. But with trial and error
-# figured out that there was no problem in this part of code. 
+# figured out that there was no problem in this part of code.
 '''from sklearn.feature_extraction.text import TfidfVectorizer
 #word_data = pickle.load(open("real_your_word_data.pkl.txt", "rb"))
 #word_data = pickle.load(open("your_word_data.pkl.txt", "rb"))

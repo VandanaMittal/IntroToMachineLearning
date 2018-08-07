@@ -59,9 +59,12 @@ for i in features_list:
         print "important feature is :", i, "feature index is :", counter-1
 
 # Quiz 28
+# Solution : sshacklensf
 features_name = vectorizer.get_feature_names()
-print("words associated to most important feature", features_name[33614])
+# print("words associated to most important feature", features_name[33614])
 
+# Quiz 29 Next feature is : cgermannsf
+print("words associated to most important feature", features_name[14343])
 
-# Quiz 29
-# Remove the word obtained using Quiz 28
+# Quiz 30 Next feature is : houectect : but it doesn't look like an obvious signature word so let's keep moving without removing it.
+print("words associated to most important feature", features_name[21323])
