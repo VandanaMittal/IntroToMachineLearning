@@ -39,6 +39,7 @@ labels_train   = labels_train[:150]
 
 ### your code goes here
 # Quiz 26
+# Soluion : Accuracy on the test data is 0.94
 from sklearn.metrics import accuracy_score
 from sklearn import tree
 clf = tree.DecisionTreeClassifier()
@@ -46,3 +47,22 @@ clf = clf.fit(features_train, labels_train)
 pred = clf.predict(features_test)
 acc = accuracy_score(labels_test, pred)
 print("Accuracy on the test data is :", acc)
+
+
+# Quiz 27
+# Solution : The feature value is 0.76 and its index is 33614
+features_list = clf.feature_importances_
+counter = 0
+for i in features_list:
+    counter = counter + 1
+    if (i > 0.2):
+        print "important feature is :", i, "feature index is :", counter-1
+
+'''# Quiz 28
+features_name = vectorizer.get_feature_names()
+print("words associated to most important feature", features_name[32139])
+
+
+# Quiz 29
+# Remove the word obtained using Quiz 28
+'''
