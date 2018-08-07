@@ -68,3 +68,6 @@ print("words associated to most important feature", features_name[14343])
 
 # Quiz 30 Next feature is : houectect : but it doesn't look like an obvious signature word so let's keep moving without removing it.
 print("words associated to most important feature", features_name[21323])
+
+print("Accuracy on the test data is :", acc) # Accuracy is 0.816
+print("Now that we've removed the outlier signature words : the training data is starting to overfit to the words that remain.")
