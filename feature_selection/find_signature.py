@@ -58,11 +58,10 @@ for i in features_list:
     if (i > 0.2):
         print "important feature is :", i, "feature index is :", counter-1
 
-'''# Quiz 28
+# Quiz 28
 features_name = vectorizer.get_feature_names()
-print("words associated to most important feature", features_name[32139])
+print("words associated to most important feature", features_name[33614])
 
 
 # Quiz 29
 # Remove the word obtained using Quiz 28
-'''
