@@ -29,15 +29,20 @@ labels, features = targetFeatureSplit(data)
 
 ### it's all yours from here forward!
 
+# Quiz 18 : Splitted the data into test and training data. Accuracy is 0.72.
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.3, random_state=42)
+
 # Quiz 17 : Training the full dataset and using the default parameters of the decision treeself.
 # Testing is then done on the same data. Accuracy is pretty high 0.989 which is ambigous.
 from sklearn.metrics import accuracy_score
 from sklearn import tree
-#clf = tree.DecisionTreeClassifier(min_samples_split = 40)
-#clf = clf.fit(features_train, labels_train)
-#pred = clf.predict(features_test)
+#clf = tree.DecisionTreeClassifier()
+#clf = clf.fit(features, labels)
+#pred = clf.predict(features)
 clf = tree.DecisionTreeClassifier()
-clf = clf.fit(features, labels)
-pred = clf.predict(features)
-acc = accuracy_score(labels, pred)
-print("The accuracy of overfitted data is :", acc)
+clf = clf.fit(X_train, y_train)
+pred = clf.predict(X_test)
+acc = accuracy_score(y_test, pred)
+#print("The accuracy of overfitted data is :", acc)
+print("The accuracy on test data is :", acc)
