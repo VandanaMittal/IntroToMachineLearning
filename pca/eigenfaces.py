@@ -73,6 +73,13 @@ t0 = time()
 pca = RandomizedPCA(n_components=n_components, whiten=True).fit(X_train)
 print "done in %0.3fs" % (time() - t0)
 
+# Quiz 34 : variance by the first principal component and the second
+variance_PC = pca.explained_variance_ratio_
+first_PC_var = variance_PC[0]
+sec_PC_var = variance_PC[1]
+print "First PC variance is :", first_PC_var
+print "Second PC variance is :", sec_PC_var
+
 eigenfaces = pca.components_.reshape((n_components, h, w))
 
 print "Projecting the input data on the eigenfaces orthonormal basis"
