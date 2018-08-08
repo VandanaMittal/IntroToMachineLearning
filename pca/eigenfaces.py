@@ -51,6 +51,7 @@ n_features = X.shape[1]
 # the label to predict is the id of the person
 y = lfw_people.target
 target_names = lfw_people.target_names
+print target_names
 n_classes = target_names.shape[0]
 
 print "Total dataset size:"
@@ -66,12 +67,25 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 ###############################################################################
 # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
 # dataset): unsupervised feature extraction / dimensionality reduction
+#n_components = 150
+
+# Quiz 36 and 37 : Higher the F1 score, better the performance. Chosen number of
+# components are [10, 15, 25, 50, 100, 250]. As the number of components increased
+# from 10 to 100 the performance improves, after that the F1 score reduces.
 n_components = 150
 
 print "Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0])
 t0 = time()
 pca = RandomizedPCA(n_components=n_components, whiten=True).fit(X_train)
 print "done in %0.3fs" % (time() - t0)
+
+# Quiz 34 : variance by the first principal component and the second
+#print(pca.explained_variance_ratio_)
+variance_PC = pca.explained_variance_ratio_
+first_PC_var = variance_PC[0]
+sec_PC_var = variance_PC[1]
+print "First PC variance is :", first_PC_var
+print "Second PC variance is :", sec_PC_var
 
 eigenfaces = pca.components_.reshape((n_components, h, w))
 
@@ -109,6 +123,9 @@ print "done in %0.3fs" % (time() - t0)
 
 print classification_report(y_test, y_pred, target_names=target_names)
 print confusion_matrix(y_test, y_pred, labels=range(n_classes))
+
+#print classification_report(y_test, y_pred, target_names= "Ariel Sharon")
+
 
 
 ###############################################################################
