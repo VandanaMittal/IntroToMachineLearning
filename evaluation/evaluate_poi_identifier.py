@@ -42,7 +42,7 @@ pred = clf.predict(X_test)
 # Solution : If the the person in the predicted data is POI then the value in pred
 # for that person is 1, otherwise 0.
 
-print sum(pred)
+print "the number of POIs are :", sum(pred)  # ans = 4
 
 count = 0
 for i in pred:
@@ -51,6 +51,9 @@ for i in pred:
         print i
         print count
 
-#print len(pred)
+# Quiz 29 : How many people total are in your test set?
+print "the total people in test set are :", len(pred) # ans = 29
+
+
 acc = accuracy_score(y_test, pred)
 print("The accuracy on test data is :", acc)
