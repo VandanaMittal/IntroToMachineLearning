@@ -26,6 +26,31 @@ labels, features = targetFeatureSplit(data)
 
 
 
-### your code goes here 
+### your code goes here
+
+# Splitted the data into test and training data. Accuracy is 0.724
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.3, random_state=42)
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(X_train, y_train)
+pred = clf.predict(X_test)
 
 
+# Quiz 28 : How many POIs are predicted for the test set for your POI identifier?
+# Solution : If the the person in the predicted data is POI then the value in pred
+# for that person is 1, otherwise 0.
+
+print sum(pred)
+
+count = 0
+for i in pred:
+    count = count + 1
+    if i==1:
+        print i
+        print count
+
+#print len(pred)
+acc = accuracy_score(y_test, pred)
+print("The accuracy on test data is :", acc)
