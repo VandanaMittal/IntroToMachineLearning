@@ -54,9 +54,20 @@ count = 0
 for i in pred:
     count = count + 1
     if i==1:
-        #print i
+        # print i
         print count
         # set the predicted POI as 0, the accuracy is improved to 86.2%
         pred[count-1] = 0 # 0.862
 acc = accuracy_score(y_test, pred)
 print("The accuracy on test data after replacing POI as 0 is :", acc) # accuracy = 0.862
+
+# Quiz 31 : Do you get any true positives? (a true positive is the
+# case where both the actual label and the predicted label are 1)
+
+predicted_labels = pred
+true_labels = y_test
+true_positives = 0
+for i in range(len(predicted_labels)):
+    if predicted_labels[i] == 1 and true_labels[i] == 1:
+        true_positives = true_positives + 1
+print "the true positives are: ", true_positives   # there are no true positives. having imbalanced classes like we have in the Enron dataset (many more non-POIs than POIs) introduces some special challenges, namely that you can just guess the more common class label for every point, not a very insightful strategy, and still get pretty good accuracy!
