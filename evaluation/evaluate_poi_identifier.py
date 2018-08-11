@@ -89,3 +89,17 @@ print "precision score is:", p  # ans = 0
 from sklearn.metrics import recall_score
 r = recall_score(y_test, pred, average='binary')
 print "recall score is:", r
+
+
+# Quiz 34:
+predictions_ex = [0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1]
+true_labels_ex = [0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0]
+
+predicted_labels = predictions_ex
+true_labels = true_labels_ex
+
+true_positives = 0
+for i in range(len(predicted_labels)):
+    if predicted_labels[i] == 1 and true_labels[i] == 1:
+        true_positives = true_positives + 1
+print "true positives of example are: ", true_positives
