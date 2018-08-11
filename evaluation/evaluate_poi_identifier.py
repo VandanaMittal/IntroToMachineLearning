@@ -84,3 +84,8 @@ print "the true positives are: ", true_positives
 from sklearn.metrics import precision_score
 p = precision_score(y_test, pred, average='binary')
 print "precision score is:", p  # ans = 0
+
+# Quiz 33: To find the recall score
+from sklearn.metrics import recall_score
+r = recall_score(y_test, pred, average='binary')
+print "recall score is:", r
