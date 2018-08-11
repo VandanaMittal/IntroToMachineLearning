@@ -115,3 +115,6 @@ print "true positives of example are: ", true_positives # True Positives = 6 (pr
 print "true negatives of example are: ", true_negatives # True Negatives = 9 (predicted negative and actually negative)
 print "false positives of example are: ", false_positives # False Positives = 3 (predicted positive but actually negative)
 print "false negatives of example are: ", false_negatives # False Negatives = 2 (predicted negative but actually positive)
+
+p = precision_score(true_labels, predicted_labels, average='binary')
+print "precision score of example is:", p  # ans = 0
