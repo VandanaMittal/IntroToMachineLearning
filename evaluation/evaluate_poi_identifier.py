@@ -99,7 +99,11 @@ predicted_labels = predictions_ex
 true_labels = true_labels_ex
 
 true_positives = 0
+true_negatives = 0
 for i in range(len(predicted_labels)):
     if predicted_labels[i] == 1 and true_labels[i] == 1:
         true_positives = true_positives + 1
+    if predicted_labels[i] == 0 and true_labels[i] == 0:
+        true_negatives = true_negatives + 1
 print "true positives of example are: ", true_positives
+print "true negatives of example are: ", true_negatives
