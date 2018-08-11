@@ -37,6 +37,9 @@ clf = tree.DecisionTreeClassifier()
 clf = clf.fit(X_train, y_train)
 pred = clf.predict(X_test)
 
+'''from sklearn.metrics import precision_score
+p = precision_score(y_test, pred, average='binary')
+print "precision score is:", p'''
 
 # Quiz 28 : How many POIs are predicted for the test set for your POI identifier?
 # Solution : If the the person in the predicted data is POI then the value in pred
@@ -70,4 +73,14 @@ true_positives = 0
 for i in range(len(predicted_labels)):
     if predicted_labels[i] == 1 and true_labels[i] == 1:
         true_positives = true_positives + 1
-print "the true positives are: ", true_positives   # there are no true positives. having imbalanced classes like we have in the Enron dataset (many more non-POIs than POIs) introduces some special challenges, namely that you can just guess the more common class label for every point, not a very insightful strategy, and still get pretty good accuracy!
+print "the true positives are: ", true_positives
+# there are no true positives. having imbalanced classes like we have in the
+# Enron dataset (many more non-POIs than POIs) introduces some special challenges,
+# namely that you can just guess the more common class label for every point, not
+# a very insightful strategy, and still get pretty good accuracy!
+
+
+# Quiz 32: To find the precision score
+from sklearn.metrics import precision_score
+p = precision_score(y_test, pred, average='binary')
+print "precision score is:", p  # ans = 0
