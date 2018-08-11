@@ -100,10 +100,14 @@ true_labels = true_labels_ex
 
 true_positives = 0
 true_negatives = 0
+false_positives = 0
 for i in range(len(predicted_labels)):
     if predicted_labels[i] == 1 and true_labels[i] == 1:
         true_positives = true_positives + 1
     if predicted_labels[i] == 0 and true_labels[i] == 0:
         true_negatives = true_negatives + 1
-print "true positives of example are: ", true_positives
-print "true negatives of example are: ", true_negatives
+    if predicted_labels[i] == 1 and true_labels[i] == 0:
+        false_positives = false_positives + 1
+print "true positives of example are: ", true_positives # True Positives = 3 (predicted positive and actually positive)
+print "true negatives of example are: ", true_negatives # True Negatives = 3 (predicted negative and actually negative)
+print "false positives of example are: ", false_positives # False Positives = 3 (predicted positive but actually negative)
