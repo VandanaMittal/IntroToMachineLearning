@@ -118,3 +118,6 @@ print "false negatives of example are: ", false_negatives # False Negatives = 2 
 
 p = precision_score(true_labels, predicted_labels, average='binary')
 print "precision score of example is:", p  # ans = 0
+
+r = recall_score(true_labels, predicted_labels, average='binary')
+print "recall score of example is:", r
